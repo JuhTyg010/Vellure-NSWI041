@@ -1,0 +1,25 @@
+@startuml
+left to right direction
+actor "User" as AC_U
+actor "Registered user" as AC_FT
+rectangle "Searching, filtering and booking Services" {
+    usecase "Search Services on a map" as UC_SM
+    usecase "Payment info" as UC_PI
+    usecase "Refund request option" as UC_RR
+    usecase "Recommendations" as UC_RS
+    usecase "Book service" as UC_BS
+    usecase "Filter Services" AS UC_FS
+}
+UC_BS .u.> UC_SM : <<extend>>
+UC_BS .u.> UC_RS : <<extend>>
+UC_BS .u.> UC_PI : <<extend>>
+UC_SM .l.> UC_FS : <<include>>
+UC_RS .r.> UC_FS : <<include>>
+UC_RR .r.> UC_PI : <<include>>
+
+AC_U --> UC_SM
+AC_U --> UC_PI
+AC_U --> UC_RR
+AC_FT -u-|> AC_U
+AC_FT --> UC_RS
+@enduml
