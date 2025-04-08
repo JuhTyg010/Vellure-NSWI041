@@ -1,0 +1,48 @@
+@startuml
+start
+
+:Show service details;
+if (Any available time slots?) then (yes)
+    :Show calendar with available time slots;
+else (no)
+    :Inform user that there are no available time slots;
+    :User clicks the "Acknowledge" button;
+    stop
+endif
+
+
+label time_slot
+repeat 
+    :The user chooses one of the available times in calendar; 
+
+repeat while (Time slot is available?) is (no) not (yes)
+
+:The user clicks a button to continue;
+:The systems shows a details of the order;
+
+if ("User confirms details of the service ") then (yes)
+    : The systen creates a booking;
+else (no)
+    :The system cancels the provisional booking.;
+    :No booking is created;
+    stop
+endif
+
+:The systems shows user a page with payments methods;
+if ("User exits payment method page?") then (yes)
+    :The user does not select a payment method and exits the flow.;
+    :The system cancels the provisional booking;
+    :No booking is created;
+    stop
+else (no)
+    if ("User completes payment?") then (yes)
+        : Booking is payed and confirmed;
+        stop
+    else (no)
+        :The system cancels the provisional booking.;
+        :No booking is created;
+    endif
+endif
+
+stop
+@enduml
