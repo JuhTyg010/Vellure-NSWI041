@@ -1,0 +1,25 @@
+@startuml
+hide empty description
+state "Details of the service" as DetailsService
+state "Slots not found" as SlotsNotFound
+state "Calendar with available time slots" as Calendar
+state "Showing continue button" as ContinueButton
+state "Slot is not available" as SlotNotAvailable
+state "Order details" as OrderDetails
+state "Payment methods" as PaymentMethods
+state "Booking confirmed" as BookingConfirmed
+
+[*] -r-> DetailsService
+DetailsService -d-> SlotsNotFound : No slots found
+DetailsService -r-> Calendar : Slots found
+Calendar -r-> ContinueButton : Selected available slot
+Calendar -d-> SlotNotAvailable : Selected \n unavailable slot
+ContinueButton -r-> OrderDetails : User clicks continue
+OrderDetails -d-> PaymentMethods : User confirms \n details of the service
+PaymentMethods -d-> BookingConfirmed : Paymenet completed
+
+PaymentMethods -d-> [*]: Bookin is confirmed
+SlotsNotFound -d-> [*] : Can't book the service
+SlotNotAvailable -d-> Calendar : Force to select \n available slot
+OrderDetails -d-> [*] : Details of the service \n are not confirmed
+@enduml
