@@ -1,0 +1,29 @@
+@startuml
+start
+
+:The business logs into the platform;
+:From the dashboard, the business selects the "Certifications" tab;
+if (Are there any certifications already?) then (yes)
+    :The system shows the list of certifications with services\n and a button to add a new certification;
+else (no)
+    :The system shows an empty list of certifications with a button\n to add a new certification;
+endif
+
+:The business clicks the button to add a new certification;
+
+if (Are there any services created already?) then (yes)
+else (no)
+    :The system shows a popup with information that before adding a certification, a service should be added;
+    stop
+endif
+
+repeat 
+    :The business fills in the form with the certification details;
+    :The business clicks the button to save the certification;
+backward:The system shows a popup with information\n that before adding a certification,\n a service should be added;
+repeat while (All required fields are filled?) is (no) not (yes);
+
+:The System saves a data of this certification;
+:The System returns to Certification tab;
+stop
+@enduml
