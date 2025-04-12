@@ -1,0 +1,39 @@
+@startuml
+
+class Service{
+    name
+    description
+    price
+    duration
+}
+
+
+class User {
+    given name
+    email address
+}
+
+
+class Business {
+    legal name
+    email address
+    services: [0..*] Service
+}
+
+class TimeSlot {
+    start time
+    end time
+}
+
+class ServiceBooking {
+    booking date
+    booking time
+}
+
+
+Service "0..*" -- "0..*" TimeSlot : has
+User "0..*" -- "0..*" Service : books
+(User, Service) .l. ServiceBooking
+
+
+@enduml
