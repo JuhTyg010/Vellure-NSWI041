@@ -18,7 +18,7 @@ rectangle "Provide Services" {
     usecase "Providing time slots" as UC_PS
     usecase "Service customization" as UC_SC
     usecase "View and respond to Client reviews" as UC_RC
-    usecase "Manage Certifications and Quality Badges" as UC_MC
+    usecase "Add new Certifications" as UC_MC
     usecase "Control Performance stats" as UC_CPS
 }
 
