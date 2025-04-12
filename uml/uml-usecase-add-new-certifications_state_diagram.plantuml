@@ -1,0 +1,19 @@
+@startuml
+hide empty description
+state "Displaying dashboard" as Dashboard
+state "Displaying certifications" as Certifications
+state "Adding new certification" as AddNewCertification
+state "Saving new certification" as SavingNewCertification
+state "Displaying error popup" as NoServices
+state "Displaying filling error" as FillingError
+
+[*] -r-> Dashboard
+Dashboard -r-> Certifications : Click on the "Certifications" tab
+Certifications -r-> AddNewCertification : Clicked on "Add"\n with existing services
+Certifications -d-> NoServices : Clicked on "Add" without services
+AddNewCertification -r-> SavingNewCertification : Clicked on "Save" with filled form
+AddNewCertification -d-> FillingError : Clicked on "Save" without required fields
+FillingError -r-> AddNewCertification : Clicked on "OK" in popup
+NoServices -d-> [*]: No certification is added
+SavingNewCertification -d-> [*]: Certification is added
+@enduml
