@@ -33,6 +33,7 @@ class ServiceBooking {
 
 Service "0..*" -- "0..*" TimeSlot : has
 User "0..*" -- "0..*" Service : books
+Business "1" -- "0..*" Service : provides
 (User, Service) .l. ServiceBooking
 
 
