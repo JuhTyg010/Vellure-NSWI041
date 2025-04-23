@@ -1,40 +1,77 @@
 @startuml
 
-class Service{
-    name
-    description
-    price
-    duration
-}
-
-
 class User {
     given name
     email address
+    phone number
 }
 
+class "Registered User" as RegisteredUser {
+    user id
+    password
+}
 
 class Business {
-    legal name
-    email address
-    services: [0..*] Service
+    bussiness id
+    name
+    description
+    certifications
 }
 
-class TimeSlot {
-    start time
-    end time
+class "Business Performance Stats" as BusinessPerformanceStats
+
+class Service {
+   service id
+   name
+   description
+   location
+   price
+   duration
 }
 
-class ServiceBooking {
-    booking date
-    booking time
+class "Service Category" as ServiceCategory {
+    category id
+    category name
+    category description
 }
 
+class "Service Booking" as ServiceBooking {
+    scheduled date
+    creation date
+    refund deadline
+}
 
-Service "0..*" -- "0..*" TimeSlot : has
-User "0..*" -- "0..*" Service : books
-Business "1" -- "0..*" Service : provides
-(User, Service) .l. ServiceBooking
+class "Service Review" as ServiceReview {
+    user rating
+    user feedback
+    submission date
+}
 
+class "Time Slot" as TimeSlot {
+   start time
+   end time
+}
+
+enum "Booking Status" as BookingStatus {
+   pending
+   confirmed
+   canceled
+   refunded
+}
+
+class "Payment Method" as PaymentMethod
+
+
+RegisteredUser --|> User
+Business "1" -r-> "0..*" Service : provides
+Service "0..*" *--> "0..*" TimeSlot : has
+User "0..*" --> "0..*" Service : booked service
+(User, Service) .. ServiceBooking
+ServiceBooking  "0..*" --> "1" BookingStatus : has status
+RegisteredUser "1" --> "0..*" PaymentMethod : can save payment method
+RegisteredUser "1" --> "0..1*" ServiceReview : can submit
+Service "1" <-u- "0..*" ServiceReview : receives user review
+Service "0..*" --> "1" ServiceCategory : belongs to
+Business "1" -u-> "0..*" BusinessPerformanceStats : has
 
 @enduml
