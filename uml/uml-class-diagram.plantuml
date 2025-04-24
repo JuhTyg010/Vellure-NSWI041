@@ -9,10 +9,11 @@ class User {
 class "Registered User" as RegisteredUser {
     user id
     password
+    service preferences
 }
 
 class Business {
-    bussiness id
+    business id
     name
     description
     certifications
@@ -64,14 +65,19 @@ class "Payment Method" as PaymentMethod
 
 RegisteredUser --|> User
 Business "1" -r-> "0..*" Service : provides
-Service "0..*" *--> "0..*" TimeSlot : has
+Service "0..*" *--> "0..*" TimeSlot : available in
 User "0..*" --> "0..*" Service : booked service
 (User, Service) .. ServiceBooking
 ServiceBooking  "0..*" --> "1" BookingStatus : has status
-RegisteredUser "1" --> "0..*" PaymentMethod : can save payment method
-RegisteredUser "1" --> "0..1*" ServiceReview : can submit
+RegisteredUser "1" -r-> "0..*" PaymentMethod : can save payment method
+RegisteredUser "1" --> "0..1" ServiceReview : can submit
 Service "1" <-u- "0..*" ServiceReview : receives user review
 Service "0..*" --> "1" ServiceCategory : belongs to
 Business "1" -u-> "0..*" BusinessPerformanceStats : has
+Business "1" -r-> "0..*" ServiceReview : can respond to
+User "1" -d-> "0..*" ServiceBooking : can cancel
+ServiceBooking "1" --> "1" TimeSlot : reserved in
+ServiceBooking "1" -r--> "1" PaymentMethod : paid using
+
 
 @enduml
