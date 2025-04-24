@@ -71,7 +71,7 @@ User "0..*" --> "0..*" Service : booked service
 ServiceBooking  "0..*" --> "1" BookingStatus : has status
 RegisteredUser "1" -r-> "0..*" PaymentMethod : can save payment method
 RegisteredUser "1" --> "0..1" ServiceReview : can submit
-Service "1" <-u- "0..*" ServiceReview : receives user review
+Service "1" -u-> "0..*" ServiceReview : receives user review
 Service "0..*" --> "1" ServiceCategory : belongs to
 Business "1" -u-> "0..*" BusinessPerformanceStats : has
 Business "1" -r-> "0..*" ServiceReview : can respond to
