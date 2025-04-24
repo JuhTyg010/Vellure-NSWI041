@@ -184,7 +184,7 @@
         <mxCell id="v2CLXZi6vXICMEOhnzI7-49" value="Respond to User Reviews" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="v2CLXZi6vXICMEOhnzI7-48">
           <mxGeometry x="36.88" y="120" width="156.25" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="v2CLXZi6vXICMEOhnzI7-50" value="Filter Services" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="v2CLXZi6vXICMEOhnzI7-48">
+        <mxCell id="v2CLXZi6vXICMEOhnzI7-50" value="Review Service" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="v2CLXZi6vXICMEOhnzI7-48">
           <mxGeometry x="43.75" y="50" width="142.5" height="40" as="geometry" />
         </mxCell>
         <mxCell id="v2CLXZi6vXICMEOhnzI7-52" value="" style="curved=1;endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="v2CLXZi6vXICMEOhnzI7-50">
