@@ -1,0 +1,31 @@
+@startuml
+start
+
+:The client logs into the platform;
+:Client navigates to "My Bookings";
+
+:Client selects a booking to request refund;
+
+if (Is the booking eligible for refund?) then (yes)
+    :Client clicks "Request Refund";
+    :Client selects reason or writes custom reason;
+
+    if (Reason qualifies for auto refund?) then (yes)
+        :System processes refund automatically;
+        :Refund is issued to original payment method;
+    else (no)
+        :System sends refund request for manual review;
+        :Client is notified that review is in progress;
+        :Support or Business reviews the refund request;
+        :Decision made: Approve or Reject;
+    endif
+
+    :Client is notified of refund status;
+    :Transaction history is updated;
+else (no)
+    :System informs client that booking is not eligible for refund;
+    :Client may contact support manually;
+endif
+
+stop
+@enduml

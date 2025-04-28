@@ -1,0 +1,30 @@
+@startuml
+hide empty description
+
+state "Displaying Dashboard" as Dashboard
+state "Viewing Bookings" as ViewBookings
+state "Checking Eligibility" as CheckEligibility
+state "Submitting Request" as SubmitRequest
+state "Auto Processing Refund" as AutoRefund
+state "Refund Under Review" as ManualReview
+state "Not Eligible Notification" as NotEligible
+state "Refund Completed" as RefundDone
+state "Client Notified" as Notified
+
+[*] --> Dashboard
+Dashboard --> ViewBookings : Navigate to "My Bookings"
+ViewBookings --> CheckEligibility : Select a booking
+CheckEligibility --> SubmitRequest : Eligible for refund
+CheckEligibility --> NotEligible : Not eligible
+
+SubmitRequest --> AutoRefund : Reason: 24h cancel\nor business cancelled
+SubmitRequest --> ManualReview : Reason: Dissatisfaction
+
+AutoRefund --> RefundDone : Refund processed
+ManualReview --> Notified : Client notified of review
+NotEligible --> Notified : Client informed refund denied
+
+RefundDone --> Notified : Client notified of refund
+
+@enduml
+
