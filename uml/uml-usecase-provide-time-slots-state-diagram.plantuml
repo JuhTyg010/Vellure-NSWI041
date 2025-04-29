@@ -1,0 +1,20 @@
+@startuml
+hide empty description
+
+[*] --> LoggedIn
+
+LoggedIn --> ViewingSchedule : Navigate to "My Availability"
+
+ViewingSchedule --> EditingSlotDetails : Click "Add Availability"
+ViewingSchedule --> EditingSlotDetails : Drag on calendar
+
+EditingSlotDetails --> Validating : Click "Save" or Submit
+
+Validating --> SlotSaved : Input valid
+Validating --> ErrorShown : Input invalid
+
+ErrorShown --> EditingSlotDetails : Return to modal (manual fix)
+
+SlotSaved --> ViewingSchedule : Return to schedule
+
+@enduml

@@ -1,0 +1,51 @@
+@startuml
+start
+
+:Login with valid credentials;
+:Navigate to "My Availability";
+:Display schedule view;
+
+split
+    partition "Add via Form" {
+        :Click "Add Availability";
+        :Show form with:
+            - Days of week
+            - Start/End time
+            - Services
+            - Duration
+            - Repeat Weekly toggle;
+
+        :Enter availability;
+        :Click "Save";
+
+        if (Valid input?) then (yes)
+            :Save availability;
+            :Reflect on schedule;
+        else (no)
+            :Highlight errors;
+            :Prompt for correction;
+            :Update and resubmit;
+            -> [back to Click "Save"];
+        endif
+    }
+split again
+    partition "Add via Calendar" {
+        :Click and drag on calendar;
+        :Show pre-filled modal;
+
+        :Select services;
+        :Add recurrence and notes;
+        :Click "Save";
+
+        if (Valid input?) then (yes)
+            :Save slot to calendar;
+        else (no)
+            :Show validation errors;
+            :Prompt correction;
+            -> [back to Click "Save"];
+        endif
+    }
+endsplit
+
+stop
+@enduml
