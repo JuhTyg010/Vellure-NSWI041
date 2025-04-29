@@ -1,0 +1,34 @@
+@startuml
+hide empty description
+
+state "Authenticating user" as Login
+state "Displaying dashboard" as Dashboard
+state "Displaying service order history" as History
+state "Displaying no service orders message" as NoServices
+state "Error loading service orders" as HistoryError
+state "Displaying service details" as Service
+state "Error loading service details" as ServiceError
+
+[*] --> Login
+Login --> Dashboard : valid credentials
+Login --> Login : invalid credentials
+
+Dashboard --> History : select "My Bookings" (orders exist)
+Dashboard --> NoServices : select "My Bookings" (no orders)
+Dashboard --> HistoryError : select "My Bookings" (system error)
+
+NoServices --> Dashboard : return
+NoServices --> [*] : unsuccessful (no orders)
+
+History --> Service : click order details
+History --> ServiceError : load error (details fail to load)
+
+HistoryError --> Dashboard : go back
+HistoryError --> [*] : unsuccessful (couldn't load history)
+
+Service --> [*] : successful (details shown)
+
+ServiceError --> History : go back
+ServiceError --> [*] : unsuccessful (couldn't load details)
+
+@enduml
