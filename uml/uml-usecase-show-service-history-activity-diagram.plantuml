@@ -1,0 +1,40 @@
+@startuml
+start
+
+:User logs into the system;
+
+if (Credentials valid?) then (yes)
+:Dashboard is displayed;
+else (no)
+:Login error is displayed;
+stop
+endif
+
+:User selects "My Bookings";
+if (Network or system error happens?) then (yes)
+repeat
+:Error is shown:\n"Unable to load bookings";
+repeat while (Retry is successful?) is (no) not (yes)
+else (no)
+endif
+
+if (Any service orders exist?) then (no)
+    :Show message:\n"You have not ordered any services yet.";\nSuggests exploring services;
+    stop
+else (yes)
+endif
+    :System shows list of service orders;
+    :User selects an individual service order;
+
+if (Details load successfully?) then (no)
+      repeat
+      :Show error:\n"Unable to load service details.";
+      repeat while (Retry is successful?) is (no) not (yes)
+else (yes)
+endif
+      :System displays service details;
+      stop
+
+
+
+@enduml
